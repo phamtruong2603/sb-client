@@ -1,0 +1,10 @@
+.input-v2-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 10px;
+}
+
+.input-v2-label {
+  column-gap: 3px;
+}
