@@ -92,7 +92,7 @@ const RegisterForm: React.FC = () => {
         />
       </form>
       <p className="login-link">
-        Đã có tài khoản? <a href="/login">Đăng nhập</a>
+        Đã có tài khoản? <a href="/auth/login">Đăng nhập</a>
       </p>
     </div>
   );

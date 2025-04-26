@@ -1,13 +1,17 @@
-import React from "react";
-import { Form } from "antd";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Form } from "antd";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
-import FormItemV2 from "../../common/input-v2/FormItemV2";
 import ButtonV2 from "../../common/button-v2/ButtonV2";
-import './auth.css';
-import { axiosApi } from "../../api/axios";
-import { login } from "./auth.service";
+import FormItemV2 from "../../common/input-v2/FormItemV2";
+import { AppDispatch } from "../../redux/store";
+import { loginDispatch } from "../../redux/user/userActions";
+import "./auth.css";
+import { RootState } from "../../redux/rootReducer";
+import { toastCustom } from "../../common/messages/toastCustom";
+import { toast, ToastContainer } from "react-toastify";
 
 const schema = yup.object({
   username: yup
@@ -28,22 +32,27 @@ const schema = yup.object({
 const LoginForm: React.FC = () => {
   const formControl = useForm<any>({
     defaultValues: {
-      username: 'username5',
-      password: 'password5',
+      username: "username5",
+      password: "password5",
     },
     resolver: yupResolver(schema),
   });
+
+  const dispatch: AppDispatch = useDispatch();
+  const { user, loading, error } = useSelector((state: RootState) => state.user);
 
   const { handleSubmit } = formControl;
 
   const onSubmit = async (data: any) => {
     const { username, password } = data;
-
-    const res = await login({username, password});
-    // lưu lại token vào localStorage
-    localStorage.setItem("token", res.data.token);
-    localStorage.setItem("user", JSON.stringify(res.data.user));
+    dispatch(loginDispatch({ username, password }));
   };
+
+  useEffect(() => {
+    if (user) {
+      toastCustom({message: "Đăng nhập thành công!", type: "success" });
+    }
+  }, [user]);
 
   return (
     <div className="login-form">
@@ -73,11 +82,7 @@ const LoginForm: React.FC = () => {
         <div className="forgot-password">
           <a href="/forgot-password">Quên mật khẩu?</a>
         </div>
-        <ButtonV2
-          label="Đăng nhập"
-          type="primary"
-          htmlType="submit"
-        />
+        <ButtonV2 label="Đăng nhập" type="primary" htmlType="submit" />
       </Form>
       <div className="register-link">
         <a href="/auth/register">Đăng ký tài khoản mới</a>
