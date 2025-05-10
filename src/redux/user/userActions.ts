@@ -15,7 +15,7 @@ export const loginDispatch = (data: { username: string; password: string }) => {
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
     } catch (error: any) {
-      dispatch({ type: LOGIN_FAILURE, payload: error.toString() });
+      dispatch({ type: LOGIN_FAILURE, payload: "loginfail" });
     }
   };
 };

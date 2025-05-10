@@ -1,17 +1,17 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Form } from "antd";
 import React, { useEffect } from "react";
+import { Form } from "antd";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import ButtonV2 from "../../common/button-v2/ButtonV2";
 import FormItemV2 from "../../common/input-v2/FormItemV2";
 import { AppDispatch } from "../../redux/store";
 import { loginDispatch } from "../../redux/user/userActions";
-import "./auth.css";
 import { RootState } from "../../redux/rootReducer";
 import { toastCustom } from "../../common/messages/toastCustom";
-import { toast, ToastContainer } from "react-toastify";
+import "./auth.css";
+import { API_URL } from "../../config/environment";
 
 const schema = yup.object({
   username: yup
@@ -39,7 +39,7 @@ const LoginForm: React.FC = () => {
   });
 
   const dispatch: AppDispatch = useDispatch();
-  const { user, loading, error } = useSelector((state: RootState) => state.user);
+  const { user } = useSelector((state: RootState) => state.user);
 
   const { handleSubmit } = formControl;
 
@@ -48,9 +48,13 @@ const LoginForm: React.FC = () => {
     dispatch(loginDispatch({ username, password }));
   };
 
+  const authGoogle = () => {
+    window.location.href = `${API_URL}/auth/google`;
+  };
+
   useEffect(() => {
     if (user) {
-      toastCustom({message: "Đăng nhập thành công!", type: "success" });
+      toastCustom({ message: "Đăng nhập thành công!", type: "success" });
     }
   }, [user]);
 
@@ -87,6 +91,38 @@ const LoginForm: React.FC = () => {
       <div className="register-link">
         <a href="/auth/register">Đăng ký tài khoản mới</a>
       </div>
+      <hr className="m-3" />
+      <ButtonV2
+        label={
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <img
+              src="https://www.citypng.com/public/uploads/preview/google-logo-icon-gsuite-hd-701751694791470gzbayltphh.png"
+              alt="Google"
+              style={{ width: "20px", height: "20px", marginRight: "8px" }}
+            />
+            Continue with Google
+          </div>
+        }
+        type="default"
+        className="w-100 fs-6"
+        onClick={authGoogle}
+      />
+
+      <ButtonV2
+        label={
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png"
+              alt="Google"
+              style={{ width: "20px", height: "20px", marginRight: "8px" }}
+            />
+            Continue with Google
+          </div>
+        }
+        type="default"
+        className="w-100 fs-6 mt-3"
+        onClick={authGoogle}
+      />
     </div>
   );
 };

@@ -1,22 +1,24 @@
-import { Route, Routes } from "react-router-dom";
-import AuthRoutes from "./routes/AuthRoutes";
-import Notfound from "./features/notfound/Notfound";
-import BaseRoute from "./routes/BaseRoute";
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import Notfound from "./features/notfound/Notfound";
+import store from "./redux/store";
+import AuthRoutes from "./routes/AuthRoutes";
+import BaseRoute from "./routes/BaseRoute";
 
 function App() {
   return (
     <div className="App">
-      <Provider store={store}>
-        <Routes>
-          <Route index path="/auth/*" element={<AuthRoutes />} />
-          <Route index path="/*" element={<BaseRoute />} />
-          <Route index path="*" element={<Notfound />} />
-        </Routes>
-      </Provider>
-      <ToastContainer />
+      <BrowserRouter>
+        <Provider store={store}>
+          <Routes>
+            <Route index path="/auth/*" element={<AuthRoutes />} />
+            <Route index path="/*" element={<BaseRoute />} />
+            <Route index path="*" element={<Notfound />} />
+          </Routes>
+        </Provider>
+        <ToastContainer />
+      </BrowserRouter>
     </div>
   );
 }

@@ -2,23 +2,20 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 
 interface ProtectedRouteProps {
-  component: any;
+  component: React.ComponentType;
   isProtected?: boolean;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = (props) => {
-  const { component: Component, isProtected } = props;
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
+  component: Component,
+  isProtected = false,
+}) => {
+  const isAuthenticated = localStorage.getItem("token") !== null;
+  const redirectPath = "/auth/login";
 
-  // if (!isProtected) {
-  //   return <Component />;
-  // }
-
-  // const isAuthenticated = false;
-  // const redirectPath = "/auth/login";
-
-  // if (!isAuthenticated) {
-  //   return <Navigate to={redirectPath} replace />;
-  // }
+  if (!isAuthenticated && isProtected) {
+    return <Navigate to={redirectPath} replace />;
+  }
 
   return <Component />;
 };

@@ -2,7 +2,7 @@ import { Button } from "antd";
 import React from "react";
 
 interface ButtonV2Props {
-  label: string;
+  label: string | React.ReactNode;
   type?: "primary" | "default" | "dashed" | "text" | "link";
   onClick?: () => void;
   disabled?: boolean;

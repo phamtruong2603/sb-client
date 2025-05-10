@@ -19,7 +19,6 @@ export const toastCustom = (data: {
     hideProgressBar = true,
   } = data;
 
-  debugger
   if (type) {
     return toast[type](message, {
       position: position,
