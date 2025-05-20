@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Input, Table, Space } from 'antd';
 import { EditOutlined, PlusOutlined } from '@ant-design/icons';
+import { Input, Space, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
+import { useState } from 'react';
 import ButtonV2 from '../../../common/button-v2/ButtonV2';
 
 const { Search } = Input;
@@ -39,11 +39,10 @@ const columns: ColumnsType<DataType> = [
 ];
 
 const PathConfiguration = () => {
-  const [search, setSearch] = useState('');
   const [data, setData] = useState(dataSource);
 
   const onSearch = (value: string) => {
-    setSearch(value);
+    console.log(value)
     setData(
       dataSource.filter(
         item =>

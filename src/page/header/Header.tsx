@@ -1,11 +1,8 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Dropdown, theme } from "antd";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useDispatch } from "react-redux";
 import ButtonV2 from "../../common/button-v2/ButtonV2";
-import { toastCustom } from "../../common/messages/toastCustom";
-import { RootState } from "../../redux/rootReducer";
 import { AppDispatch } from "../../redux/store";
 import { logoutDispatch } from "../../redux/user/userActions";
 import "./header.css";
@@ -22,8 +19,6 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
   } = theme.useToken();
 
   const dispatch: AppDispatch = useDispatch();
-  const { user } = useSelector((state: RootState) => state.user);
-  const navigate = useNavigate();
 
   const handleMenuClick = (e: { key: string }) => {
     if (e.key === "logout") {
