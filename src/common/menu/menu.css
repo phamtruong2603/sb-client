@@ -1,0 +1,52 @@
+.ant-menu {
+  scrollbar-width: none;         /* Firefox */
+}
+.ant-menu::-webkit-scrollbar {
+  display: none;                 /* Chrome, Safari */
+}
+
+.menu-admin-root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: 0.2s;
+}
+
+.menu-dark {
+  background: #001529;
+}
+
+.menu-light {
+  background: #fff;
+}
+
+.menu-admin-menu {
+  flex: 1;
+  overflow-y: auto;
+  background: inherit;
+}
+
+.menu-admin-switch {
+  padding: 16px;
+  background: inherit;
+  text-align: center;
+}
+
+.menu-admin-logo {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  background: inherit;
+  border-bottom: 1px solid #eee;
+}
+
+.menu-admin-logo-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #111;
+  letter-spacing: 1px;
+}
+.menu-dark .menu-admin-logo-text {
+  color: #fff;
+}

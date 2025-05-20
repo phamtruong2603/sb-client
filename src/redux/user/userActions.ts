@@ -4,6 +4,7 @@ import {
   LOGIN_FAILURE,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
+  LOGOUT,
 } from "../../constants/actionRedux";
 
 export const loginDispatch = (data: { username: string; password: string }) => {
@@ -19,3 +20,16 @@ export const loginDispatch = (data: { username: string; password: string }) => {
     }
   };
 };
+
+export const logoutDispatch = () => {
+  return (dispatch: Dispatch) => {
+    dispatch({ type: LOGIN_REQUEST });
+    try {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      dispatch({ type: LOGOUT, payload: null });
+    } catch (error: any) {
+      console.log(error)
+    }
+  };
+}

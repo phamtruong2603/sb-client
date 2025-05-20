@@ -12,6 +12,7 @@ import { RootState } from "../../redux/rootReducer";
 import { toastCustom } from "../../common/messages/toastCustom";
 import "./auth.css";
 import { API_URL } from "../../config/environment";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup.object({
   username: yup
@@ -38,6 +39,8 @@ const LoginForm: React.FC = () => {
     resolver: yupResolver(schema),
   });
 
+  const navigate = useNavigate();
+
   const dispatch: AppDispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state.user);
 
@@ -55,6 +58,7 @@ const LoginForm: React.FC = () => {
   useEffect(() => {
     if (user) {
       toastCustom({ message: "Đăng nhập thành công!", type: "success" });
+      navigate("/dasboard");
     }
   }, [user]);
 
