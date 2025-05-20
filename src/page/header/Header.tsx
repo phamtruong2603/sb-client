@@ -34,13 +34,6 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
     }
   };
 
-  useEffect(() => {
-    if (!user) {
-      toastCustom({ message: "Logout thành công!", type: "success" });
-      navigate("/");
-    }
-  }, [user]);
-
   return (
     <header
       className="header-root"

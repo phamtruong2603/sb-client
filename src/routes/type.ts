@@ -4,7 +4,6 @@ export interface NavigatorParams {
   action: Action;
   component: any;
   path: string
-  isMenu?: boolean;
   isProtected?: boolean;
   icon?: any;
   menuName?: string;

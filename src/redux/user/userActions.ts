@@ -6,6 +6,7 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
 } from "../../constants/actionRedux";
+import { toastCustom } from "../../common/messages/toastCustom";
 
 export const loginDispatch = (data: { username: string; password: string }) => {
   return async (dispatch: Dispatch) => {
@@ -28,6 +29,8 @@ export const logoutDispatch = () => {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       dispatch({ type: LOGOUT, payload: null });
+      window.location.href = "/";
+      toastCustom({ message: "Logout thành công!", type: "success" });
     } catch (error: any) {
       console.log(error)
     }
